@@ -7,3 +7,5 @@ RUN yum -y install rsync openssh-clients libvirt-client \
   https://releases.hashicorp.com/vagrant/2.2.2/vagrant_2.2.2_x86_64.rpm \
   && vagrant box add centos/7 --provider libvirt \
   && vagrant plugin install vagrant-libvirt
+
+COPY Vagrantfile /workDir/
