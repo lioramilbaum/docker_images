@@ -8,4 +8,8 @@ RUN yum -y install rsync openssh-clients libvirt-client \
   && vagrant box add centos/7 --provider libvirt \
   && vagrant plugin install vagrant-libvirt
 
-COPY Vagrantfile /centos-vm/
+COPY Vagrantfile /etc/systemd/system/vagrant-vm.service.d/
+COPY scripts/*.sh /usr/lib/systemd/scripts/
+COPY vagrant-vm.service /etc/systemd/system/
+
+RUN systemctl enable vagrant-vm.service

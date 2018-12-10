@@ -1,0 +1,11 @@
+[Unit]
+Description=power-on/off vagrant vm
+
+[Service]
+Type=oneshot
+ExecStart=/usr/lib/systemd/scripts/vagrant-vm-up.sh
+ExecStop=/usr/lib/systemd/scripts/vagrant-vm-down.sh
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
