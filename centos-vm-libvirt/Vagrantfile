@@ -1,5 +1,6 @@
 Vagrant.configure(2) do |config|
   config.vm.box = "centos/7"
+  config.ssh.insert_key = false
   config.vm.provider "libvirt" do |libvirt|
     libvirt.memory = 2048
     libvirt.cpus = 1
@@ -9,5 +10,11 @@ Vagrant.configure(2) do |config|
     libvirt.uri = "qemu:///system"
     libvirt.connect_via_ssh = false
     libvirt.username = "root"
+    libvirt.management_network_guest_ipv6 = "no"
+  end
+  config.trigger.after :up do |trigger|
+    trigger.name = "Finished Message"
+    trigger.info = "Machine is up!"
+    trigger.run  = {inline: "touch /var/tmp/vagrant-vm-up"}
   end
 end
