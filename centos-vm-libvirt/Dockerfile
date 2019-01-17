@@ -1,4 +1,4 @@
-FROM quay.io/pod_utils/systemd-libvirt:latest
+FROM quay.io/pod_utils/systemd-libvirt:1.0.3
 
 RUN yum -y install rsync openssh-clients libvirt-client \
   libxslt-devel libxml2-devel libvirt-devel libguestfs-tools-c \
@@ -12,6 +12,5 @@ RUN yum -y install rsync openssh-clients libvirt-client \
 COPY Vagrantfile /etc/systemd/system/vagrant-vm.service.d/
 COPY scripts/*.sh /usr/lib/systemd/scripts/
 COPY vagrant-vm.service /etc/systemd/system/
-COPY remount-sys.service /etc/systemd/system/
 
-RUN systemctl enable remount-sys.service vagrant-vm.service
+RUN systemctl enable vagrant-vm.service
